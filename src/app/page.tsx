@@ -20,16 +20,16 @@ export default function Home() {
             setLoading={setLoading}
           />
         </section>
-        <section className='container mx-auto flex flex-col justify-center items-center'>
-          {loading ? (
+        <section className='container mx-auto flex flex-col justify-center items-center p-4'>
+          {loading && (
             <Spinner
               color='default'
               label='OGPを検索中です'
               labelColor='foreground'
             />
-          ) : (
+          )}
+          {!loading && ogp && (
             <TabMenu>
-              <Vertical ogp={ogp} />
               <Vertical ogp={ogp} />
             </TabMenu>
           )}
