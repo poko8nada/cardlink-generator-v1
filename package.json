@@ -14,7 +14,8 @@
     "next": "15.1.5",
     "open-graph-scraper": "^6.8.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tw-to-css": "^0.0.12"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
