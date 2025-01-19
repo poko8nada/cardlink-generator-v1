@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ja' className='dark'>
-      <body className={'antialiased'}>
+      <body className={'antialiased min-h-svh'}>
         <Providers>{children}</Providers>
       </body>
     </html>
