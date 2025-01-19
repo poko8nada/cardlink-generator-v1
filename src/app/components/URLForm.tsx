@@ -4,16 +4,21 @@ import { useState } from 'react'
 
 export default ({
   ogpDispatch,
-}: { ogpDispatch: React.Dispatch<React.SetStateAction<OgObject | null>> }) => {
+  loading,
+  setLoading,
+}: {
+  ogpDispatch: React.Dispatch<React.SetStateAction<OgObject | null>>
+  loading: boolean
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
   const [submitValue, setSubmitValue] = useState({
     url: '',
     error: {},
-    loading: false,
   })
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSubmitValue(prev => ({ ...prev, loading: true }))
 
+    setLoading(true)
     const url = submitValue.url.toString().trim()
 
     const addProtocolUrl =
@@ -30,8 +35,8 @@ export default ({
         error: {
           url: 'URLは無効です。正しいURLを入力してください',
         },
-        loading: false,
       }))
+      setLoading(false)
       return
     }
 
@@ -51,8 +56,8 @@ export default ({
       setSubmitValue(prev => ({
         ...prev,
         error: { url: 'OGPの取得に失敗しました' },
-        loading: false,
       }))
+      setLoading(false)
       return
     }
 
@@ -62,8 +67,8 @@ export default ({
     setSubmitValue(() => ({
       url: addProtocolUrl,
       error: {},
-      loading: false,
     }))
+    setLoading(false)
   }
   return (
     <Form
@@ -89,7 +94,7 @@ export default ({
         type='submit'
         variant='flat'
         name='submitButton'
-        isLoading={submitValue.loading}
+        isLoading={loading}
       >
         作成
       </Button>

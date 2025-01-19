@@ -1,31 +1,37 @@
 'use client'
+import { Spinner } from '@heroui/react'
 import type { OgObject } from 'open-graph-scraper/types'
 import { useState } from 'react'
 import URLForm from './components/URLForm'
+import Vertical from './components/cards/vertical'
+import TabMenu from './components/tabMenu'
 
 export default function Home() {
   const [ogp, ogpDispatch] = useState<OgObject | null>(null)
+  const [loading, setLoading] = useState(false)
 
   return (
     <div className=''>
       <main className='w-full flex flex-col justify-center items-center'>
         <section className='container mx-auto p-4'>
-          <URLForm ogpDispatch={ogpDispatch} />
+          <URLForm
+            ogpDispatch={ogpDispatch}
+            loading={loading}
+            setLoading={setLoading}
+          />
         </section>
-        <section className='container mx-auto p-4'>
-          {ogp ? (
-            <div>
-              {ogp.ogImage && (
-                <img
-                  src={ogp.ogImage[0].url}
-                  alt={ogp.ogImage[0].alt || 'og image'}
-                />
-              )}
-              <h1>{ogp.ogTitle}</h1>
-              <p>{ogp.ogDescription}</p>
-            </div>
+        <section className='container mx-auto flex flex-col justify-center items-center'>
+          {loading ? (
+            <Spinner
+              color='default'
+              label='OGPを検索中です'
+              labelColor='foreground'
+            />
           ) : (
-            <p>loading...</p>
+            <TabMenu>
+              <Vertical ogp={ogp} />
+              <Vertical ogp={ogp} />
+            </TabMenu>
           )}
         </section>
       </main>
