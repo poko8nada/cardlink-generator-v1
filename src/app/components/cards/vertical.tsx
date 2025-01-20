@@ -57,7 +57,7 @@ export default ({ ogp }: { ogp: OgObject | null }) => {
               )}
               <span
                 style={twj(
-                  'text-gray-700 text-xs leading-none line-clamp-1 max-w-[8rem]',
+                  'text-gray-700 text-xs leading-none line-clamp-1 max-w-[10rem]',
                 )}
               >
                 {ogp.ogSiteName || ogp.ogTitle}
