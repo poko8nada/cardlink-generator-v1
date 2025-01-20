@@ -5,7 +5,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 export default ({ children }: { children: React.ReactNode }) => {
   const html = renderToStaticMarkup(children)
   return (
-    <div className='mx-auto w-full max-w-3xl'>
+    <div className='mx-auto w-full max-w-3xl mt-6'>
       {children && (
         <Tabs aria-label='Options'>
           <Tab key='preview' title='Preview'>

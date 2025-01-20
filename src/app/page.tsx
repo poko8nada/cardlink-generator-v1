@@ -4,6 +4,7 @@ import type { OgObject } from 'open-graph-scraper/types'
 import { useState } from 'react'
 import URLForm from './components/URLForm'
 import HorizontalA from './components/cards/horizontalA'
+import HorizontalB from './components/cards/horizontalB'
 import Vertical from './components/cards/vertical'
 import TabMenu from './components/tabMenu'
 
@@ -36,6 +37,9 @@ export default function Home() {
             <>
               <TabMenu>
                 <HorizontalA ogp={ogp} />
+              </TabMenu>
+              <TabMenu>
+                <HorizontalB ogp={ogp} />
               </TabMenu>
               <TabMenu>
                 <Vertical ogp={ogp} />

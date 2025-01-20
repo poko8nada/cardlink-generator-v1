@@ -25,7 +25,6 @@ export default ({
       url.startsWith('http://') || url.startsWith('https://')
         ? url
         : `https://${url}`
-    console.log(addProtocolUrl)
 
     try {
       new URL(addProtocolUrl)
@@ -62,7 +61,6 @@ export default ({
     }
 
     const data = await res.json()
-    console.log(data)
     ogpDispatch(data)
     setSubmitValue(() => ({
       url: addProtocolUrl,
