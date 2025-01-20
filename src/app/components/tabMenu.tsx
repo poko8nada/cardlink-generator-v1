@@ -4,21 +4,17 @@ import { renderToStaticMarkup } from 'react-dom/server'
 
 export default ({ children }: { children: React.ReactNode }) => {
   const html = renderToStaticMarkup(children)
-  console.log(html)
   return (
-    <div className='w-full max-w-[40rem] mx-auto'>
+    <div className='mx-auto w-full max-w-3xl'>
       {children && (
         <Tabs aria-label='Options'>
           <Tab key='preview' title='Preview'>
-            <Card>
-              <CardBody className='flex justify-center items-center py-6 bg-foreground-200'>
-                {children}
-              </CardBody>
-            </Card>
+            <div className='w-full overflow-x-scroll p-6 bg-foreground-200 rounded-lg'>
+              {children}
+            </div>
           </Tab>
           <Tab key='code' title='Code'>
             <Card>
-              {/* <CardBody> */}
               <Snippet
                 symbol=''
                 onCopy={() => navigator.clipboard.writeText(html)}
@@ -26,7 +22,6 @@ export default ({ children }: { children: React.ReactNode }) => {
               >
                 {html}
               </Snippet>
-              {/* </CardBody> */}
             </Card>
           </Tab>
         </Tabs>

@@ -3,12 +3,14 @@ import { Spinner } from '@heroui/react'
 import type { OgObject } from 'open-graph-scraper/types'
 import { useState } from 'react'
 import URLForm from './components/URLForm'
+import HorizontalA from './components/cards/horizontalA'
 import Vertical from './components/cards/vertical'
 import TabMenu from './components/tabMenu'
 
 export default function Home() {
   const [ogp, ogpDispatch] = useState<OgObject | null>(null)
   const [loading, setLoading] = useState(false)
+  console.log(ogp)
 
   return (
     <div className=''>
@@ -26,12 +28,19 @@ export default function Home() {
               color='default'
               label='OGPを検索中です'
               labelColor='foreground'
+              size='lg'
+              className='mt-20'
             />
           )}
           {!loading && ogp && (
-            <TabMenu>
-              <Vertical ogp={ogp} />
-            </TabMenu>
+            <>
+              <TabMenu>
+                <HorizontalA ogp={ogp} />
+              </TabMenu>
+              <TabMenu>
+                <Vertical ogp={ogp} />
+              </TabMenu>
+            </>
           )}
         </section>
       </main>

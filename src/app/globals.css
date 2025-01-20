@@ -23,6 +23,7 @@ body {
 
 pre:has(> span) {
   white-space: pre-wrap !important;
+  word-break: break-all;
 }
 
 pre + button[aria-label="Copy to clipboard"] {

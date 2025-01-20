@@ -6,20 +6,29 @@ export default ({ ogp }: { ogp: OgObject | null }) => {
   return (
     <>
       {ogp?.ogTitle && (
-        <div style={twj('max-w-xs rounded-md shadow-md bg-gray-100 mx-auto')}>
+        <div
+          style={twj(
+            'min-w-[30rem] rounded-md shadow-md bg-gray-100 flex mx-auto max-w-3xl',
+          )}
+        >
           <Link
             href={ogp.ogUrl || ogp.requestUrl || ''}
             target='_blank'
             rel='noopener noreferrer'
-            style={twj('flex justify-center items-center')}
+            style={twj(
+              'flex justify-center items-center shrink-0 rounded-l-md',
+            )}
           >
             {ogp.ogImage?.[0]?.url && (
               <img
                 src={ogp.ogImage[0].url}
                 alt={ogp.ogImage[0].alt || 'og image'}
-                style={twj(
-                  'object-cover object-center w-full max-w-[24rem] rounded-t-md aspect-auto	bg-gray-500',
-                )}
+                style={{
+                  ...twj(
+                    'object-cover object-center w-full max-h-[10rem] max-w-[14rem] rounded-l-md w-full h-full aspect-auto bg-gray-500',
+                  ),
+                  imageRendering: 'auto',
+                }}
               />
             )}
           </Link>
@@ -31,15 +40,13 @@ export default ({ ogp }: { ogp: OgObject | null }) => {
             >
               <h2
                 style={twj(
-                  'text-xl font-semibold tracking-wide text-gray-900 mb-3 line-clamp-3',
+                  'text-md font-semibold tracking-wide text-gray-900 mb-2 line-clamp-2',
                 )}
               >
                 {ogp.ogTitle}
               </h2>
             </Link>
-            <p style={twj('text-gray-600 text-sm line-clamp-4')}>
-              {ogp.ogDescription}
-            </p>
+            {/* <p style={twj('text-gray-600 text-sm')}>{ogp.ogDescription}</p> */}
             <Link
               href={ogp.ogUrl || ogp.requestUrl || ''}
               target='_blank'
