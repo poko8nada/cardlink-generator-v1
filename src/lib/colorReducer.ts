@@ -12,14 +12,14 @@ export const colorTypes = {
     bg: '#f3f4f6',
     title: '#374151',
     text: '#6b7280',
-    border: '#e5e7eb',
+    border: '#6b7280',
   },
   dark: {
     name: 'dark',
-    bg: '#0a0a0a',
-    title: '#ededed',
-    text: '#ededed',
-    border: '#ededed',
+    bg: '#272727',
+    title: '#eeeeee',
+    text: '#ababab',
+    border: '#ababab',
   },
 }
 
