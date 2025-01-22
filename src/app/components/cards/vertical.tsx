@@ -1,12 +1,25 @@
+import type { Color } from '@/lib/colorReducer'
 import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
 
-export default ({ ogp }: { ogp: OgObject | null }) => {
+export default ({
+  ogp,
+  color,
+  isBorder,
+}: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
+  // console.log('VERTICAL_A')
+  const { bg, title, text, border } = color
   return (
     <>
       {ogp?.ogTitle && (
-        <div style={twj('max-w-xs rounded-md shadow-md bg-gray-100 mx-auto')}>
+        <div
+          style={{
+            ...twj('max-w-xs rounded-md shadow-md mx-auto'),
+            backgroundColor: bg,
+            border: isBorder ? `2px solid ${border}` : 'none',
+          }}
+        >
           <Link
             href={ogp.ogUrl || ogp.requestUrl || ''}
             target='_blank'
@@ -17,9 +30,13 @@ export default ({ ogp }: { ogp: OgObject | null }) => {
               <img
                 src={ogp.ogImage[0].url}
                 alt={ogp.ogImage[0].alt || 'og image'}
-                style={twj(
-                  'object-cover object-center w-full max-w-[24rem] rounded-t-md aspect-auto	bg-gray-500',
-                )}
+                style={{
+                  ...twj(
+                    'object-cover object-center w-full max-w-[24rem] rounded-t-md aspect-auto	bg-gray-500',
+                  ),
+                  imageRendering: 'auto',
+                  borderBottom: isBorder ? `2px solid ${border}` : 'none',
+                }}
               />
             )}
           </Link>
@@ -30,14 +47,22 @@ export default ({ ogp }: { ogp: OgObject | null }) => {
               rel='noopener noreferrer'
             >
               <h2
-                style={twj(
-                  'text-xl font-semibold tracking-wide text-gray-900 mb-3 line-clamp-3',
-                )}
+                style={{
+                  ...twj(
+                    'text-xl font-semibold tracking-wide mb-3 line-clamp-3',
+                  ),
+                  color: title,
+                }}
               >
                 {ogp.ogTitle}
               </h2>
             </Link>
-            <p style={twj('text-gray-600 text-sm line-clamp-4')}>
+            <p
+              style={{
+                ...twj('text-sm line-clamp-4'),
+                color: text,
+              }}
+            >
               {ogp.ogDescription}
             </p>
             <Link
@@ -56,9 +81,12 @@ export default ({ ogp }: { ogp: OgObject | null }) => {
                 />
               )}
               <span
-                style={twj(
-                  'text-gray-700 text-xs leading-none line-clamp-1 max-w-[10rem]',
-                )}
+                style={{
+                  ...twj(
+                    'text-gray-700 text-xs leading-none line-clamp-1 max-w-[10rem]',
+                  ),
+                  color: text,
+                }}
               >
                 {ogp.ogSiteName || ogp.ogTitle}
               </span>

@@ -1,15 +1,24 @@
+import type { Color } from '@/lib/colorReducer'
 import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
 
-export default ({ ogp }: { ogp: OgObject | null }) => {
+export default ({
+  ogp,
+  color,
+  isBorder,
+}: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
+  // console.log('CARD_A')
+  const { bg, title, text, border } = color
   return (
     <>
       {ogp?.ogTitle && (
         <div
-          style={twj(
-            'min-w-[30rem] rounded-md shadow-md bg-gray-100 flex mx-auto max-w-3xl',
-          )}
+          style={{
+            ...twj('min-w-[30rem] rounded-md shadow-md flex mx-auto max-w-3xl'),
+            backgroundColor: bg,
+            border: isBorder ? `2px solid ${border}` : 'none',
+          }}
         >
           <Link
             href={ogp.ogUrl || ogp.requestUrl || ''}
@@ -28,6 +37,7 @@ export default ({ ogp }: { ogp: OgObject | null }) => {
                     'object-cover object-center w-full max-h-[10rem] max-w-[14rem] rounded-l-md w-full h-full aspect-auto bg-gray-500',
                   ),
                   imageRendering: 'auto',
+                  borderRight: isBorder ? `2px solid ${border}` : 'none',
                 }}
               />
             )}
@@ -39,9 +49,12 @@ export default ({ ogp }: { ogp: OgObject | null }) => {
               rel='noopener noreferrer'
             >
               <h2
-                style={twj(
-                  'text-md font-semibold tracking-wide text-gray-900 mb-2 line-clamp-2',
-                )}
+                style={{
+                  ...twj(
+                    'text-lg font-semibold tracking-wide mb-2 line-clamp-2',
+                  ),
+                  color: title,
+                }}
               >
                 {ogp.ogTitle}
               </h2>
@@ -63,9 +76,10 @@ export default ({ ogp }: { ogp: OgObject | null }) => {
                 />
               )}
               <span
-                style={twj(
-                  'text-gray-700 text-xs leading-none line-clamp-1 max-w-[10rem]',
-                )}
+                style={{
+                  ...twj('text-xs leading-none line-clamp-1 max-w-[10rem]'),
+                  color: text,
+                }}
               >
                 {ogp.ogSiteName || ogp.ogTitle}
               </span>

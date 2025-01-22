@@ -3,14 +3,16 @@ import type { OgObject } from 'open-graph-scraper/types'
 import { useState } from 'react'
 
 export default ({
-  ogpDispatch,
   loading,
   setLoading,
+  setOgp,
 }: {
-  ogpDispatch: React.Dispatch<React.SetStateAction<OgObject | null>>
   loading: boolean
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setOgp: React.Dispatch<React.SetStateAction<OgObject | null>>
 }) => {
+  // console.log('URLFORM')
+
   const [submitValue, setSubmitValue] = useState({
     url: '',
     error: {},
@@ -61,7 +63,7 @@ export default ({
     }
 
     const data = await res.json()
-    ogpDispatch(data)
+    setOgp(data)
     setSubmitValue(() => ({
       url: addProtocolUrl,
       error: {},

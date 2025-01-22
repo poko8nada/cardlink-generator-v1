@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   const ogp = await getOgp(url)
   if (!ogp) return new Response(null, { status: 400 })
 
-  console.log(ogp)
+  // console.log(ogp)
 
   if (ogp.ogUrl && ogp.ogImage && /^https:\/\/www\.amazon*/.test(ogp.ogUrl)) {
     ogp.ogImage = ogp.ogImage.toReversed().filter(image => {
@@ -27,11 +27,11 @@ export async function POST(req: NextRequest) {
     ogp.ogImage[0].url = `${ogp.ogImage[0].url}?s=200`
   }
 
-  if (ogp.favicon && ogp.ogUrl) {
+  if (ogp.favicon && ogp.requestUrl) {
     const faviconHref = ogp.favicon
     const favicon = /^http.*/.test(faviconHref)
       ? faviconHref
-      : `${ogp.ogUrl.replace(/(^https?:\/\/[^/]+).*$/, '$1')}/${faviconHref.replace(/^\/?/, '').replace(/\/?$/, '')}`
+      : `${ogp.requestUrl.replace(/(^https?:\/\/[^/]+).*$/, '$1')}/${faviconHref.replace(/^\/?/, '').replace(/\/?$/, '')}`
     ogp.favicon = favicon
   }
 
