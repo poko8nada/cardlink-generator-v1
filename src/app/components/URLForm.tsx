@@ -11,7 +11,7 @@ export default ({
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
   setOgp: React.Dispatch<React.SetStateAction<OgObject | null>>
 }) => {
-  console.log('URLFORM')
+  // console.log('URLFORM')
 
   const [submitValue, setSubmitValue] = useState({
     url: '',
