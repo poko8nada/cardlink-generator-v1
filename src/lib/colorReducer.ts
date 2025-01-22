@@ -1,4 +1,5 @@
 export type Color = {
+  name: string
   bg: string
   title: string
   text: string
@@ -7,12 +8,14 @@ export type Color = {
 
 export const colorTypes = {
   light: {
+    name: 'light',
     bg: '#f3f4f6',
     title: '#374151',
     text: '#6b7280',
     border: '#e5e7eb',
   },
   dark: {
+    name: 'dark',
     bg: '#0a0a0a',
     title: '#ededed',
     text: '#ededed',

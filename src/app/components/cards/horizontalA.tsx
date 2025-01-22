@@ -3,14 +3,10 @@ import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
 
-export default function HorizontalA({
-  ogp,
-  color,
-}: { ogp: OgObject | null; color: Color }) {
-  console.log('CARD_A')
+export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
+  // console.log('CARD_A')
   const { bg, title, text, border } = color
-
-  const jsx = (
+  return (
     <>
       {ogp?.ogTitle && (
         <div
@@ -87,5 +83,4 @@ export default function HorizontalA({
       )}
     </>
   )
-  return jsx
 }

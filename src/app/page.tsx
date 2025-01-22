@@ -1,9 +1,10 @@
 'use client'
-import { reducer } from '@/lib/colorReducer'
+import { colorTypes, reducer } from '@/lib/colorReducer'
 import { Spinner } from '@heroui/react'
 import type { OgObject } from 'open-graph-scraper/types'
 import { useState } from 'react'
 import { useReducer } from 'react'
+import { Suspense } from 'react'
 import URLForm from './components/URLForm'
 import HorizontalA from './components/cards/horizontalA'
 import HorizontalB from './components/cards/horizontalB'
@@ -14,13 +15,8 @@ import TabMenu from './components/tabMenu'
 export default function Home() {
   const [ogp, setOgp] = useState<OgObject | null>(null)
   const [loading, setLoading] = useState(false)
-  const [color, setColor] = useReducer(reducer, {
-    bg: '#f3f4f6',
-    title: '#374151',
-    text: '#6b7280',
-    border: '#e5e7eb',
-  })
-  console.log('HOME')
+  const [color, setColor] = useReducer(reducer, colorTypes.light)
+  // console.log('HOME')
 
   return (
     <main className='w-full flex flex-col justify-center items-center'>
@@ -28,7 +24,9 @@ export default function Home() {
         <URLForm loading={loading} setLoading={setLoading} setOgp={setOgp} />
       </section>
       <section className='container mx-auto p-4'>
-        <ColorPickier setColor={setColor} />
+        <div className={!ogp ? 'hidden' : 'mx-auto w-full max-w-lg'}>
+          <ColorPickier setColor={setColor} />
+        </div>
       </section>
       <section className='container mx-auto flex flex-col justify-center items-center p-4'>
         {loading && (
@@ -41,17 +39,19 @@ export default function Home() {
           />
         )}
         {!loading && (
-          <>
+          <div className={!ogp ? 'hidden' : 'mx-auto w-full max-w-3xl'}>
             <TabMenu>
-              <HorizontalA ogp={ogp} color={color} />
+              <Suspense fallback={<Spinner />}>
+                <HorizontalA ogp={ogp} color={color} />
+              </Suspense>
             </TabMenu>
             <TabMenu>
               <HorizontalB ogp={ogp} color={color} />
             </TabMenu>
-            {/* <TabMenu>
-              <Vertical ogp={ogp} />
-            </TabMenu> */}
-          </>
+            <TabMenu>
+              <Vertical ogp={ogp} color={color} />
+            </TabMenu>
+          </div>
         )}
       </section>
     </main>
