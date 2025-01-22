@@ -3,7 +3,11 @@ import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
 
-export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
+export default ({
+  ogp,
+  color,
+  isBorder,
+}: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
   // console.log('CARD_A')
   const { bg, title, text, border } = color
   return (
@@ -13,6 +17,7 @@ export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
           style={{
             ...twj('min-w-[30rem] rounded-md shadow-md flex mx-auto max-w-3xl'),
             backgroundColor: bg,
+            border: isBorder ? `2px solid ${border}` : 'none',
           }}
         >
           <Link
@@ -32,6 +37,7 @@ export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
                     'object-cover object-center w-full max-h-[10rem] max-w-[14rem] rounded-l-md w-full h-full aspect-auto bg-gray-500',
                   ),
                   imageRendering: 'auto',
+                  borderRight: isBorder ? `2px solid ${border}` : 'none',
                 }}
               />
             )}
@@ -45,7 +51,7 @@ export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
               <h2
                 style={{
                   ...twj(
-                    'text-md font-semibold tracking-wide mb-2 line-clamp-2',
+                    'text-lg font-semibold tracking-wide mb-2 line-clamp-2',
                   ),
                   color: title,
                 }}

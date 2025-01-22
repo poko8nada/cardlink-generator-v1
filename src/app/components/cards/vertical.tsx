@@ -3,7 +3,11 @@ import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
 
-export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
+export default ({
+  ogp,
+  color,
+  isBorder,
+}: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
   // console.log('VERTICAL_A')
   const { bg, title, text, border } = color
   return (
@@ -13,6 +17,7 @@ export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
           style={{
             ...twj('max-w-xs rounded-md shadow-md mx-auto'),
             backgroundColor: bg,
+            border: isBorder ? `2px solid ${border}` : 'none',
           }}
         >
           <Link
@@ -25,9 +30,13 @@ export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
               <img
                 src={ogp.ogImage[0].url}
                 alt={ogp.ogImage[0].alt || 'og image'}
-                style={twj(
-                  'object-cover object-center w-full max-w-[24rem] rounded-t-md aspect-auto	bg-gray-500',
-                )}
+                style={{
+                  ...twj(
+                    'object-cover object-center w-full max-w-[24rem] rounded-t-md aspect-auto	bg-gray-500',
+                  ),
+                  imageRendering: 'auto',
+                  borderBottom: isBorder ? `2px solid ${border}` : 'none',
+                }}
               />
             )}
           </Link>

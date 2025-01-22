@@ -7,8 +7,12 @@ type Action = {
 }
 export default ({
   setColor,
+  isBorder,
+  setIsBorder,
 }: {
   setColor: React.Dispatch<Action>
+  isBorder: boolean
+  setIsBorder: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   // console.log('COLOR')
 
@@ -45,6 +49,8 @@ export default ({
         ))}
       </RadioGroup>
       <Switch
+        isSelected={isBorder}
+        onValueChange={setIsBorder}
         classNames={{
           base: cn(
             'inline-flex flex-row-reverse max-w-sm bg-content2 hover:bg-content3 items-center',

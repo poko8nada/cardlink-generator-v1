@@ -2,7 +2,11 @@ import type { Color } from '@/lib/colorReducer'
 import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
-export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
+export default ({
+  ogp,
+  color,
+  isBorder,
+}: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
   const { bg, title, text, border } = color
 
   return (
@@ -14,6 +18,7 @@ export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
               'min-w-[30rem] rounded-md shadow-md bg-gray-100 mx-auto max-w-3xl',
             ),
             backgroundColor: bg,
+            border: isBorder ? `2px solid ${border}` : 'none',
           }}
         >
           <Link
@@ -24,7 +29,7 @@ export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
             <h2
               style={{
                 ...twj(
-                  'text-md font-semibold tracking-wide mb-3 line-clamp-2 px-5 pt-4',
+                  'text-lg font-semibold tracking-wide mb-3 line-clamp-2 px-5 pt-4',
                 ),
                 color: title,
               }}
@@ -48,6 +53,7 @@ export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
                       'object-cover object-center w-full max-h-[8rem] max-w-[12rem] w-full h-full aspect-auto bg-gray-500',
                     ),
                     imageRendering: 'auto',
+                    border: isBorder ? `1px solid ${border}` : 'none',
                   }}
                 />
               )}
