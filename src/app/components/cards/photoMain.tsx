@@ -43,7 +43,7 @@ export default ({
               loading='lazy'
               style={{
                 ...twj(
-                  'absolute inset-0 h-full w-full object-cover object-center',
+                  'absolute inset-0 h-full w-full object-cover object-top bg-gray-500 ',
                 ),
                 imageRendering: 'auto',
               }}

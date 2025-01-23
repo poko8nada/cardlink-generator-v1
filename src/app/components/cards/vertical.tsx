@@ -32,7 +32,7 @@ export default ({
                 alt={ogp.ogImage[0].alt || 'og image'}
                 style={{
                   ...twj(
-                    'object-cover object-center w-full max-w-[24rem] rounded-t-md aspect-auto	bg-gray-500',
+                    'object-cover object-center w-full max-w-[24rem] max-h-[20rem] rounded-t-md aspect-auto	bg-gray-500 object-top',
                   ),
                   imageRendering: 'auto',
                   borderBottom: isBorder ? `2px solid ${border}` : 'none',
