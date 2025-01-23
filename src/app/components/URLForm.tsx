@@ -72,7 +72,7 @@ export default ({
   }
   return (
     <Form
-      className='w-full max-w-[40rem] flex flex-row justify-center items-s gap-3 mx-auto'
+      className='w-full max-w-xl flex flex-row justify-center items-s gap-3 mx-auto'
       onSubmit={onSubmit}
       action='/api/ogp'
       validationErrors={submitValue.error}

@@ -12,7 +12,13 @@ export default ({ children }: { children: React.ReactNode }) => {
       {children && (
         <Tabs aria-label='Options'>
           <Tab key='preview' title='Preview'>
-            <div className='w-full overflow-x-scroll p-6 bg-foreground-500 rounded-lg'>
+            <div
+              className='w-full overflow-x-scroll p-6 rounded-lg'
+              style={{
+                backgroundImage:
+                  'radial-gradient(rgba(235, 235, 235, 1), rgba(138, 138, 138, 1))',
+              }}
+            >
               {children}
             </div>
           </Tab>
