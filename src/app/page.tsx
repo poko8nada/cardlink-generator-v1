@@ -28,7 +28,7 @@ export default function Home() {
     <>
       <Header>
         <URLForm loading={loading} setLoading={setLoading} setOgp={setOgp} />
-        <div className={!ogp ? 'hidden' : 'mx-auto'}>
+        <div className={!ogp ? 'hidden' : 'ml-0 mr-auto md:mx-auto'}>
           <ColorPickier
             setColor={setColor}
             isBorder={isBorder}
