@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   const ogp = await getOgp(url)
   if (!ogp) return new Response(null, { status: 400 })
 
-  // console.log(ogp)
+  console.log(ogp)
 
   if (ogp.ogUrl && ogp.ogImage && /^https:\/\/www\.amazon*/.test(ogp.ogUrl)) {
     ogp.ogImage = ogp.ogImage.toReversed().filter(image => {
@@ -25,6 +25,17 @@ export async function POST(req: NextRequest) {
   }
   if (ogp.ogUrl && ogp.ogImage && /^https:\/\/github\.com*/.test(ogp.ogUrl)) {
     ogp.ogImage[0].url = `${ogp.ogImage[0].url}?s=200`
+  }
+
+  if (ogp.ogImage) {
+    ogp.ogImage = ogp.ogImage.filter(image => {
+      return (
+        image.url.includes('.png') ||
+        image.url.includes('.gif') ||
+        image.url.includes('.jpg') ||
+        image.url.includes('.jpeg')
+      )
+    })
   }
 
   if (ogp.favicon && ogp.requestUrl) {

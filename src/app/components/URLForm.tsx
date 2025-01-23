@@ -20,6 +20,10 @@ export default ({
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    if (submitValue.url === '') {
+      return
+    }
+
     setLoading(true)
     const url = submitValue.url.toString().trim()
 
