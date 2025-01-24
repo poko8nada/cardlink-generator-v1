@@ -1,6 +1,6 @@
 'use client'
 import { colorTypes, reducer } from '@/lib/colorReducer'
-import { Card, Snippet, Spinner } from '@heroui/react'
+import { Spinner } from '@heroui/react'
 import type { OgObject } from 'open-graph-scraper/types'
 import { useState } from 'react'
 import { useReducer } from 'react'
