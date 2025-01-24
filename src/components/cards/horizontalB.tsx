@@ -1,14 +1,14 @@
-import type { Color } from '@/lib/colorReducer'
+import type { Color } from '@/hooks/colorReducer'
+import { colorPalette } from '@/hooks/colorReducer'
 import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
-export default ({
-  ogp,
-  color,
-  isBorder,
-}: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
-  const { bg, title, text, border } = color
 
+export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
+  const { bg, title, text, border, isBorder } = color
+  if (!color) {
+    color = colorPalette.light
+  }
   return (
     <>
       {ogp?.ogTitle && (

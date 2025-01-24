@@ -1,15 +1,14 @@
-import type { Color } from '@/lib/colorReducer'
+import { type Color, colorPalette } from '@/hooks/colorReducer'
+import { col } from 'framer-motion/client'
 import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
 
-export default ({
-  ogp,
-  color,
-  isBorder,
-}: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
+export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
   // console.log('CARD_A')
-  const { bg, title, text, border } = color
+
+  const { bg, title, text, border, isBorder } = color
+
   return (
     <>
       {ogp?.ogTitle && (

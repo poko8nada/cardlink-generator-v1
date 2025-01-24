@@ -1,106 +1,72 @@
+'use client'
+import { useLoading } from '@/components/provider/loadingProvider'
 import { Button, Form, Input } from '@heroui/react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import type { OgObject } from 'open-graph-scraper/types'
-import { useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useUrlValue } from './provider/urlValueProvider'
 
-export default ({
-  loading,
-  setLoading,
-  setOgp,
-}: {
-  loading: boolean
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  setOgp: React.Dispatch<React.SetStateAction<OgObject | null>>
-}) => {
+export default () => {
   // console.log('URLFORM')
-  const { replace } = useRouter()
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
+  const { loading, setLoading } = useLoading()
 
-  const [submitValue, setSubmitValue] = useState({
-    url: '',
-    error: {},
-  })
+  const { push } = useRouter()
+  const searchParams = useSearchParams()
+
+  const { urlObj, setUrl } = useUrlValue()
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (submitValue.url === '') {
-      return
-    }
-
-    setLoading(true)
-    const url = submitValue.url.toString().trim()
+    const url = Object.fromEntries(new FormData(e.currentTarget))
+      .url.toString()
+      .trim()
+    console.log(url)
 
     const addProtocolUrl =
       url.startsWith('http://') || url.startsWith('https://')
         ? url
         : `https://${url}`
 
+    if (addProtocolUrl === searchParams.get('url')) {
+      return
+    }
+
+    setLoading(true)
+
     try {
       new URL(addProtocolUrl)
     } catch {
-      setSubmitValue(prev => ({
-        ...prev,
-        error: {
-          url: 'URLは無効です。正しいURLを入力してください',
-        },
-      }))
+      setUrl({
+        ...urlObj,
+        error: { url: 'URLが不正です' },
+      })
+
       setLoading(false)
       return
     }
 
-    setSubmitValue(prev => ({
-      ...prev,
+    setUrl({
       url: addProtocolUrl,
-    }))
+      error: { url: '' },
+    })
 
     const params = new URLSearchParams(searchParams)
-
     params.set('url', addProtocolUrl)
-    replace(`${pathname}?${params.toString()}`)
-
-    const res = await fetch(`/api/ogp?url=${searchParams.get('url')}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    if (!res.ok) {
-      setSubmitValue(prev => ({
-        ...prev,
-        error: { url: 'OGPの取得に失敗しました' },
-      }))
-      setLoading(false)
-      return
-    }
-
-    const data = await res.json()
-    setOgp(data)
-    setSubmitValue(() => ({
-      url: addProtocolUrl,
-      error: {},
-    }))
-    setLoading(false)
+    push(`/result?${params.toString()}`)
   }
+
   return (
     <Form
       className='w-full flex flex-row justify-center items-s gap-3 mx-2'
       onSubmit={onSubmit}
       action='/api/ogp'
-      validationErrors={submitValue.error}
+      validationErrors={urlObj.error}
     >
       <Input
         placeholder='https://hogehogefugafuga.com'
         type='url'
         className='w-full'
         name='url'
-        value={submitValue.url}
-        onChange={e => {
-          setSubmitValue(prev => ({
-            ...prev,
-            url: e.target.value,
-          }))
-        }}
+        defaultValue={searchParams.get('url')?.toString()}
       />
       <Button
         type='submit'

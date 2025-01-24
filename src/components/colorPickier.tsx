@@ -1,21 +1,11 @@
-import { colorTypes } from '@/lib/colorReducer'
+import { colorPalette } from '@/hooks/colorReducer'
 import { Radio, RadioGroup, cn } from '@heroui/react'
 import { Switch } from '@heroui/switch'
+import { useColor } from './provider/colorProvider'
 
-type Action = {
-  type: string
-}
-export default ({
-  setColor,
-  isBorder,
-  setIsBorder,
-}: {
-  setColor: React.Dispatch<Action>
-  isBorder: boolean
-  setIsBorder: React.Dispatch<React.SetStateAction<boolean>>
-}) => {
+export default () => {
   // console.log('COLOR')
-
+  const { color, setColor } = useColor()
   return (
     <div className='flex flex-row justify-center items-center'>
       <RadioGroup
@@ -26,15 +16,17 @@ export default ({
         defaultValue='light'
         classNames={{ base: cn('ml-4 mt-1 md:mt-0 lg:ml-0') }}
       >
-        {Object.keys(colorTypes).map(colorName => (
+        {Object.keys(colorPalette).map(colorName => (
           <Radio key={colorName} value={colorName}>
             <span className='text-sm'>{colorName}</span>
           </Radio>
         ))}
       </RadioGroup>
       <Switch
-        isSelected={isBorder}
-        onValueChange={setIsBorder}
+        isSelected={color.isBorder}
+        onValueChange={(isSelected: boolean) => {
+          setColor({ type: isSelected.toString() })
+        }}
         classNames={{ base: cn('ml-4 mt-1 md:mt-0') }}
         size='sm'
       >
