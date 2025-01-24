@@ -1,4 +1,5 @@
 import { Button, Form, Input } from '@heroui/react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import type { OgObject } from 'open-graph-scraper/types'
 import { useState } from 'react'
 
@@ -12,6 +13,9 @@ export default ({
   setOgp: React.Dispatch<React.SetStateAction<OgObject | null>>
 }) => {
   // console.log('URLFORM')
+  const { replace } = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
 
   const [submitValue, setSubmitValue] = useState({
     url: '',
@@ -50,12 +54,16 @@ export default ({
       url: addProtocolUrl,
     }))
 
-    const res = await fetch('/api/ogp', {
-      method: 'POST',
+    const params = new URLSearchParams(searchParams)
+
+    params.set('url', addProtocolUrl)
+    replace(`${pathname}?${params.toString()}`)
+
+    const res = await fetch(`/api/ogp?url=${searchParams.get('url')}`, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ url: addProtocolUrl }),
     })
     if (!res.ok) {
       setSubmitValue(prev => ({
