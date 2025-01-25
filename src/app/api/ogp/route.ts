@@ -72,6 +72,10 @@ export async function GET(req: NextRequest) {
   if (ogp.requestUrl && /^https:\/\/www\.google*/.test(ogp.requestUrl)) {
     ogp.favicon = 'https://www.google.com/favicon.ico'
   }
+  if (ogp.requestUrl && /^https:\/\/www\.youtube*/.test(ogp.requestUrl)) {
+    ogp.favicon =
+      'https://www.youtube.com/s/desktop/024ccc3d/img/logos/favicon_144x144.png'
+  }
   if (ogp.ogUrl && ogp.ogImage && /^https:\/\/github\.com*/.test(ogp.ogUrl)) {
     ogp.ogImage[0].url = `${ogp.ogImage[0].url}?s=200`
   }
