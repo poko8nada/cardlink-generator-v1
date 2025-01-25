@@ -13,18 +13,18 @@ export default ({
   if (!color) {
     color = colorPalette.light
   }
-  let bgGrad = { ...twj('relative mt-auto p-4') }
+  let bgGrad = { ...twj('relative mt-auto pt-6 px-4 pb-4') }
   if (name === 'dark') {
     bgGrad = {
       ...bgGrad,
       background:
-        'linear-gradient(0deg, rgba(40,40,40,1) 0%, rgba(70,70,70,.8) 50%, rgba(200,200,200,.1) 90%, rgba(240,240,240,.0) 100%)',
+        'linear-gradient(0deg, rgba(40,40,40,1) 0%, rgba(70,70,70,.8) 40%, rgba(200,200,200,.4) 90%, rgba(240,240,240,.0) 100%)',
     }
   } else if (name === 'light') {
     bgGrad = {
       ...bgGrad,
       background:
-        'linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(220,220,220,.8) 50%, rgba(200,200,200,.1) 90%, rgba(190,190,190,.0) 100%)',
+        'linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(220,220,220,.8) 40%, rgba(200,200,200,.4) 90%, rgba(190,190,190,.0) 100%)',
     }
   }
   return (
