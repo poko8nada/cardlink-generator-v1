@@ -79,7 +79,7 @@ export async function GET(req: NextRequest) {
     ogp.ogImage[0].url = `${ogp.ogImage[0].url}?s=200`
   }
 
-  console.log(ogp)
+  // console.log(ogp)
 
   return new Response(JSON.stringify(ogp))
 }

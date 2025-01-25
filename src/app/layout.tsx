@@ -34,7 +34,7 @@ export default function RootLayout({
             </LoadingProvider>
           </ColorProvider>
         </UrlValueProvider>
-        <section className='container mx-auto p-4 mt-20'>
+        <section className='container mx-auto p-4 mt-16'>
           <About />
         </section>
         <Footer />

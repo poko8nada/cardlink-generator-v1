@@ -88,7 +88,7 @@ export default () => {
             </div>
           </section>
           <section
-            className={!ogp ? 'hidden p-0 m-0' : 'container mx-auto p-4 mt-20'}
+            className={!ogp ? 'hidden p-0 m-0' : 'container mx-auto p-4 mt-16'}
           >
             <div className={!ogp ? 'hidden' : 'mx-auto w-full max-w-3xl'}>
               <LinkData ogp={ogp} />
