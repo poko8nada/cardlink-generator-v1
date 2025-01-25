@@ -41,6 +41,12 @@ export default ({ ogp }: { ogp: OgObject | null }) => {
           </dl>
         )
       })}
+      <div className='hidden'>
+        <p>{data.title}</p>
+        <p>{data.siteName}</p>
+        <p>{data.url}</p>
+        <p>{data.imageUrl || data.faviconUrl}</p>
+      </div>
     </>
   )
 }
