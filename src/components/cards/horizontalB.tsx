@@ -1,14 +1,18 @@
-import type { Color } from '@/lib/colorReducer'
+import type { Color } from '@/hooks/colorReducer'
+import { colorPalette } from '@/hooks/colorReducer'
 import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
+
 export default ({
   ogp,
   color,
   isBorder,
 }: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
   const { bg, title, text, border } = color
-
+  if (!color) {
+    color = colorPalette.light
+  }
   return (
     <>
       {ogp?.ogTitle && (
@@ -74,7 +78,7 @@ export default ({
                     alt='favicon'
                     width={'18'}
                     height={'18'}
-                    style={twj('rounded-full')}
+                    style={twj('rounded')}
                   />
                 )}
                 <span

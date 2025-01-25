@@ -1,4 +1,5 @@
-import type { Color } from '@/lib/colorReducer'
+import type { Color } from '@/hooks/colorReducer'
+import { colorPalette } from '@/hooks/colorReducer'
 import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
@@ -9,18 +10,21 @@ export default ({
   isBorder,
 }: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
   const { bg, title, border, name } = color
-  let bgGrad = { ...twj('relative mt-auto p-4') }
+  if (!color) {
+    color = colorPalette.light
+  }
+  let bgGrad = { ...twj('relative mt-auto pt-6 px-4 pb-4') }
   if (name === 'dark') {
     bgGrad = {
       ...bgGrad,
       background:
-        'linear-gradient(0deg, rgba(40,40,40,1) 0%, rgba(70,70,70,.8) 50%, rgba(200,200,200,.1) 90%, rgba(240,240,240,.0) 100%)',
+        'linear-gradient(0deg, rgba(40,40,40,1) 0%, rgba(70,70,70,.8) 40%, rgba(200,200,200,.4) 90%, rgba(240,240,240,.0) 100%)',
     }
   } else if (name === 'light') {
     bgGrad = {
       ...bgGrad,
       background:
-        'linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(220,220,220,.8) 50%, rgba(200,200,200,.1) 90%, rgba(190,190,190,.0) 100%)',
+        'linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(220,220,220,.8) 40%, rgba(200,200,200,.4) 90%, rgba(190,190,190,.0) 100%)',
     }
   }
   return (
@@ -30,7 +34,7 @@ export default ({
           href={ogp.ogUrl || ogp.requestUrl || ''}
           style={{
             ...twj(
-              'group relative flex max-w-[30rem] mx-auto h-48 flex-col overflow-hidden rounded-lg shadow-lg md:h-64 xl:h-96',
+              'group relative flex max-w-[28rem] mx-auto h-[15rem] flex-col overflow-hidden rounded-lg shadow-lg',
             ),
             backgroundColor: bg,
             border: isBorder ? `2px solid ${border}` : 'none',
@@ -43,7 +47,7 @@ export default ({
               loading='lazy'
               style={{
                 ...twj(
-                  'absolute inset-0 h-full w-full object-cover object-center',
+                  'absolute inset-0 h-full w-full object-cover object-center bg-gray-500 ',
                 ),
                 imageRendering: 'auto',
               }}
@@ -57,7 +61,7 @@ export default ({
                   alt='favicon'
                   width={'18'}
                   height={'18'}
-                  style={twj('rounded-full')}
+                  style={twj('rounded')}
                 />
               )}
               <span

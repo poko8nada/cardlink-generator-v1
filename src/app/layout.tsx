@@ -1,20 +1,17 @@
 import type { Metadata } from 'next'
-// import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { Providers } from './components/providers'
-// const geistSans = Geist({
-//   variable: '--font-geist-sans',
-//   subsets: ['latin'],
-// })
-
-// const geistMono = Geist_Mono({
-//   variable: '--font-geist-mono',
-//   subsets: ['latin'],
-// })
+import About from '@/components/about'
+import Footer from '@/components/footer'
+import Header from '@/components/header'
+import { ColorProvider } from '@/components/provider/colorProvider'
+import { LoadingProvider } from '@/components/provider/loadingProvider'
+import { Providers } from '@/components/provider/providers'
+import { UrlValueProvider } from '@/components/provider/urlValueProvider'
 
 export const metadata: Metadata = {
-  title: 'blog card link generator',
-  description: 'blog card link generator',
+  title: 'ブログカード風のリンクジェネレーター',
+  description:
+    'ブログやウェブサイトのリンクをカード形式で生成するツールです。簡単に使えて、見栄えの良いリンクを作成できます。',
 }
 
 export default function RootLayout({
@@ -25,7 +22,22 @@ export default function RootLayout({
   return (
     <html lang='ja' className='dark'>
       <body className={'antialiased min-h-svh'}>
-        <Providers>{children}</Providers>
+        <UrlValueProvider>
+          <ColorProvider>
+            <LoadingProvider>
+              <Providers>
+                <Header />
+                <main className='w-full flex flex-col justify-center items-center'>
+                  {children}
+                </main>
+              </Providers>
+            </LoadingProvider>
+          </ColorProvider>
+        </UrlValueProvider>
+        <section className='container mx-auto p-4 mt-16'>
+          <About />
+        </section>
+        <Footer />
       </body>
     </html>
   )

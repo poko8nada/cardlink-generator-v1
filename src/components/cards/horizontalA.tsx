@@ -1,4 +1,4 @@
-import type { Color } from '@/lib/colorReducer'
+import type { Color } from '@/hooks/colorReducer'
 import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
@@ -8,14 +8,16 @@ export default ({
   color,
   isBorder,
 }: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
-  // console.log('VERTICAL_A')
+  // console.log('CARD_A')
+
   const { bg, title, text, border } = color
+
   return (
     <>
       {ogp?.ogTitle && (
         <div
           style={{
-            ...twj('max-w-xs rounded-md shadow-md mx-auto'),
+            ...twj('min-w-[30rem] rounded-md shadow-md flex mx-auto max-w-3xl'),
             backgroundColor: bg,
             border: isBorder ? `2px solid ${border}` : 'none',
           }}
@@ -24,7 +26,9 @@ export default ({
             href={ogp.ogUrl || ogp.requestUrl || ''}
             target='_blank'
             rel='noopener noreferrer'
-            style={twj('flex justify-center items-center')}
+            style={twj(
+              'flex justify-center items-center shrink-0 rounded-l-md',
+            )}
           >
             {ogp.ogImage?.[0]?.url && (
               <img
@@ -32,10 +36,10 @@ export default ({
                 alt={ogp.ogImage[0].alt || 'og image'}
                 style={{
                   ...twj(
-                    'object-cover object-center w-full max-w-[24rem] rounded-t-md aspect-auto	bg-gray-500',
+                    'object-cover object-center w-full max-h-[10rem] max-w-[14rem] rounded-l-md w-full h-full aspect-auto bg-gray-500',
                   ),
                   imageRendering: 'auto',
-                  borderBottom: isBorder ? `2px solid ${border}` : 'none',
+                  borderRight: isBorder ? `2px solid ${border}` : 'none',
                 }}
               />
             )}
@@ -49,7 +53,7 @@ export default ({
               <h2
                 style={{
                   ...twj(
-                    'text-xl font-semibold tracking-wide mb-3 line-clamp-3',
+                    'text-lg font-semibold tracking-wide mb-2 line-clamp-2',
                   ),
                   color: title,
                 }}
@@ -57,14 +61,7 @@ export default ({
                 {ogp.ogTitle}
               </h2>
             </Link>
-            <p
-              style={{
-                ...twj('text-sm line-clamp-4'),
-                color: text,
-              }}
-            >
-              {ogp.ogDescription}
-            </p>
+            {/* <p style={twj('text-gray-600 text-sm')}>{ogp.ogDescription}</p> */}
             <Link
               href={ogp.ogUrl || ogp.requestUrl || ''}
               target='_blank'
@@ -77,14 +74,12 @@ export default ({
                   alt='favicon'
                   width={'18'}
                   height={'18'}
-                  style={twj('rounded-full')}
+                  style={twj('rounded')}
                 />
               )}
               <span
                 style={{
-                  ...twj(
-                    'text-gray-700 text-xs leading-none line-clamp-1 max-w-[10rem]',
-                  ),
+                  ...twj('text-xs leading-none line-clamp-1 max-w-[10rem]'),
                   color: text,
                 }}
               >

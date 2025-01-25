@@ -6,7 +6,7 @@ export type Color = {
   border: string
 }
 
-export const colorTypes = {
+export const colorPalette = {
   light: {
     name: 'light',
     bg: '#f3f4f6',
@@ -19,16 +19,16 @@ export const colorTypes = {
     bg: '#272727',
     title: '#eeeeee',
     text: '#ababab',
-    border: '#ababab',
+    border: '#eeeeee',
   },
 }
 
 export const reducer = (state: Color, action: { type: string }): Color => {
   switch (action.type) {
     case 'light':
-      return colorTypes[action.type]
+      return colorPalette[action.type]
     case 'dark':
-      return colorTypes[action.type]
+      return colorPalette[action.type]
     default:
       return state
   }
