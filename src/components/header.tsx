@@ -1,6 +1,6 @@
 'use client'
 import UrlForm from '@/components/urlForm'
-import { Navbar } from '@heroui/react'
+import { Navbar, cn } from '@heroui/react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import ColorPickier from './colorPickier'
@@ -8,8 +8,16 @@ export default function App() {
   const searchParams = useSearchParams()
 
   return (
-    <Navbar shouldHideOnScroll isBordered isBlurred={false} height={'7rem'}>
-      <section className='container mx-auto flex justify-center items-start md:items-center gap-1'>
+    <Navbar
+      shouldHideOnScroll
+      isBordered
+      isBlurred={false}
+      classNames={{
+        base: cn('min-h-[5rem]'),
+        wrapper: cn('h-full'),
+      }}
+    >
+      <section className='p-2 container mx-auto flex justify-center items-start md:items-center gap-1 h-full'>
         <Image
           src='/cardlinkIcon.png'
           alt='logo'
