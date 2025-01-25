@@ -34,7 +34,7 @@ export default ({
           href={ogp.ogUrl || ogp.requestUrl || ''}
           style={{
             ...twj(
-              'group relative flex max-w-[30rem] mx-auto h-48 flex-col overflow-hidden rounded-lg shadow-lg md:h-64 xl:h-96',
+              'group relative flex max-w-[28rem] mx-auto h-[15rem] flex-col overflow-hidden rounded-lg shadow-lg',
             ),
             backgroundColor: bg,
             border: isBorder ? `2px solid ${border}` : 'none',
@@ -47,7 +47,7 @@ export default ({
               loading='lazy'
               style={{
                 ...twj(
-                  'absolute inset-0 h-full w-full object-cover object-top bg-gray-500 ',
+                  'absolute inset-0 h-full w-full object-cover object-center bg-gray-500 ',
                 ),
                 imageRendering: 'auto',
               }}
@@ -61,7 +61,7 @@ export default ({
                   alt='favicon'
                   width={'18'}
                   height={'18'}
-                  style={twj('rounded-full')}
+                  style={twj('rounded')}
                 />
               )}
               <span

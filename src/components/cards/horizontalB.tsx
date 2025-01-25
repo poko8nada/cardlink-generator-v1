@@ -78,7 +78,7 @@ export default ({
                     alt='favicon'
                     width={'18'}
                     height={'18'}
-                    style={twj('rounded-full')}
+                    style={twj('rounded')}
                   />
                 )}
                 <span
