@@ -1,5 +1,4 @@
-import { type Color, colorPalette } from '@/hooks/colorReducer'
-import { col } from 'framer-motion/client'
+import type { Color } from '@/hooks/colorReducer'
 import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'

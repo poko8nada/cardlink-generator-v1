@@ -1,11 +1,13 @@
 import { colorPalette } from '@/hooks/colorReducer'
 import { Radio, RadioGroup, cn } from '@heroui/react'
 import { Switch } from '@heroui/switch'
-import { useColor } from './provider/colorProvider'
+import { useColor, useSetColor } from './provider/colorProvider'
 
 export default () => {
   // console.log('COLOR')
-  const { color, setColor } = useColor()
+  const { color } = useColor()
+  const setColor = useSetColor()
+
   return (
     <div className='flex flex-row justify-center items-center'>
       <RadioGroup

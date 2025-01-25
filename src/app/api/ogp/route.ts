@@ -1,6 +1,5 @@
 import { getOgp } from '@/lib/getOgp'
 import type { NextRequest } from 'next/server'
-import type { OgObject } from 'open-graph-scraper/types'
 
 export async function GET(req: NextRequest) {
   if (!req) return new Response(null, { status: 400 })

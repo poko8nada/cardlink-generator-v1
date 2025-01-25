@@ -1,9 +1,12 @@
 'use client'
 import { createContext, useContext, useState } from 'react'
 
-const LoadingContext = createContext({
+const LoadingContext = createContext<{
+  loading: boolean
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+}>({
   loading: false,
-  setLoading: (loading: boolean) => {},
+  setLoading: () => {},
 })
 
 export const useLoading = () => useContext(LoadingContext)

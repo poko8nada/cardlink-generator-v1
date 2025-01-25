@@ -2,7 +2,7 @@
 import { useLoading } from '@/components/provider/loadingProvider'
 import { Button, Form, Input } from '@heroui/react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useUrlValue } from './provider/urlValueProvider'
+import { useSetUrl, useUrlValue } from './provider/urlValueProvider'
 
 export default () => {
   // console.log('URLFORM')
@@ -11,7 +11,8 @@ export default () => {
   const { push } = useRouter()
   const searchParams = useSearchParams()
 
-  const { urlObj, setUrl } = useUrlValue()
+  const { urlObj } = useUrlValue()
+  const setUrl = useSetUrl()
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

@@ -8,18 +8,24 @@ export type UrlValue = {
 
 const UrlValueContext = createContext({
   urlObj: { url: '', error: { url: '' } },
-  setUrl: (urlObj: UrlValue) => {},
 })
 
+const SetUrlContext = createContext<
+  React.Dispatch<{ url: string; error: { url: string } }>
+>(() => {})
+
 export const useUrlValue = () => useContext(UrlValueContext)
+export const useSetUrl = () => useContext(SetUrlContext)
 
 export const UrlValueProvider = ({
   children,
 }: { children: React.ReactNode }) => {
   const [urlObj, setUrl] = useState({ url: '', error: { url: '' } })
   return (
-    <UrlValueContext.Provider value={{ urlObj, setUrl }}>
-      {children}
-    </UrlValueContext.Provider>
+    <SetUrlContext.Provider value={setUrl}>
+      <UrlValueContext.Provider value={{ urlObj }}>
+        {children}
+      </UrlValueContext.Provider>
+    </SetUrlContext.Provider>
   )
 }

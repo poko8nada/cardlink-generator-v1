@@ -1,21 +1,27 @@
 'use client'
 import { reducer } from '@/hooks/colorReducer'
-import { type Color, colorPalette } from '@/hooks/colorReducer'
-import { createContext, useContext, useState } from 'react'
+import { colorPalette } from '@/hooks/colorReducer'
+import { createContext, useContext } from 'react'
 import { useReducer } from 'react'
 
 const ColorContext = createContext({
   color: colorPalette.light,
-  setColor: (action: { type: string }) => {},
 })
 
+const SetColorContext = createContext<React.Dispatch<{ type: string }>>(
+  () => {},
+)
+
 export const useColor = () => useContext(ColorContext)
+export const useSetColor = () => useContext(SetColorContext)
 
 export const ColorProvider = ({ children }: { children: React.ReactNode }) => {
   const [color, setColor] = useReducer(reducer, colorPalette.light)
   return (
-    <ColorContext.Provider value={{ color, setColor }}>
-      {children}
-    </ColorContext.Provider>
+    <SetColorContext.Provider value={setColor}>
+      <ColorContext.Provider value={{ color }}>
+        {children}
+      </ColorContext.Provider>
+    </SetColorContext.Provider>
   )
 }
