@@ -76,6 +76,11 @@ export async function GET(req: NextRequest) {
     ogp.favicon =
       'https://www.youtube.com/s/desktop/024ccc3d/img/logos/favicon_144x144.png'
   }
+  if (ogp.requestUrl && /^https:\/\/note\.com*/.test(ogp.requestUrl)) {
+    ogp.favicon =
+      'https://assets.st-note.com/poc-image/manual/note-common-images/production/icons/android-chrome-192x192.png'
+  }
+
   if (ogp.ogUrl && ogp.ogImage && /^https:\/\/github\.com*/.test(ogp.ogUrl)) {
     ogp.ogImage[0].url = `${ogp.ogImage[0].url}?s=200`
   }
