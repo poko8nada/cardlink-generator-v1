@@ -1,5 +1,4 @@
 'use client'
-import About from '@/components/about'
 import HorizontalA from '@/components/cards/horizontalA'
 import HorizontalB from '@/components/cards/horizontalB'
 import PhotoMain from '@/components/cards/photoMain'
@@ -16,7 +15,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 export default () => {
   const { loading, setLoading } = useLoading()
-  const { urlObj, setUrl } = useUrlValue()
+  const { setUrl } = useUrlValue()
   const { color } = useColor()
 
   const [ogp, setOgp] = useState<OgObject | null>(null)

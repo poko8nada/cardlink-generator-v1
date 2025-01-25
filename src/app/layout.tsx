@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 // import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import About from '@/components/about'
 import Footer from '@/components/footer'
 import Header from '@/components/header'
 import { ColorProvider } from '@/components/provider/colorProvider'
@@ -43,6 +44,9 @@ export default function RootLayout({
             </LoadingProvider>
           </ColorProvider>
         </UrlValueProvider>
+        <section className='container mx-auto p-4 mt-20'>
+          <About />
+        </section>
         <Footer />
       </body>
     </html>
