@@ -11,8 +11,6 @@ export async function GET(req: NextRequest) {
   const ogp = await getOgp(url)
   if (!ogp) return new Response(null, { status: 400 })
 
-  console.log(ogp)
-
   if (ogp.ogImage) {
     ogp.ogImage = ogp.ogImage.filter(image => {
       return (
@@ -23,20 +21,16 @@ export async function GET(req: NextRequest) {
       )
     })
   }
-  if (ogp.ogImage && ogp.requestUrl) {
-    const imageUrl = ogp.ogImage[0].url
-    const url = /^http.*/.test(imageUrl)
-      ? imageUrl
-      : `${ogp.requestUrl.replace(/(^https?:\/\/[^/]+).*$/, '$1')}/${imageUrl.replace(/^\/?/, '').replace(/\/?$/, '')}`
-    ogp.favicon = url
-  }
 
-  if (ogp.favicon && ogp.requestUrl) {
+  if (ogp.favicon && (ogp.requestUrl || ogp.ogUrl)) {
+    const url = ogp.requestUrl || ogp.ogUrl
     const faviconHref = ogp.favicon
-    const favicon = /^http.*/.test(faviconHref)
-      ? faviconHref
-      : `${ogp.requestUrl.replace(/(^https?:\/\/[^/]+).*$/, '$1')}/${faviconHref.replace(/^\/?/, '').replace(/\/?$/, '')}`
-    ogp.favicon = favicon
+    if (url) {
+      const favicon = /^http.*/.test(faviconHref)
+        ? faviconHref
+        : `${url.replace(/(^https?:\/\/[^/]+).*$/, '$1')}/${faviconHref.replace(/^\/?/, '').replace(/\/?$/, '')}`
+      ogp.favicon = favicon
+    }
   }
 
   if (ogp.ogUrl && !ogp.ogSiteName) {
@@ -84,6 +78,8 @@ export async function GET(req: NextRequest) {
   if (ogp.ogUrl && ogp.ogImage && /^https:\/\/github\.com*/.test(ogp.ogUrl)) {
     ogp.ogImage[0].url = `${ogp.ogImage[0].url}?s=200`
   }
+
+  console.log(ogp)
 
   return new Response(JSON.stringify(ogp))
 }
