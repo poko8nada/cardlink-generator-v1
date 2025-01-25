@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-// import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import About from '@/components/about'
 import Footer from '@/components/footer'
@@ -9,19 +8,10 @@ import { LoadingProvider } from '@/components/provider/loadingProvider'
 import { Providers } from '@/components/provider/providers'
 import { UrlValueProvider } from '@/components/provider/urlValueProvider'
 
-// const geistSans = Geist({
-//   variable: '--font-geist-sans',
-//   subsets: ['latin'],
-// })
-
-// const geistMono = Geist_Mono({
-//   variable: '--font-geist-mono',
-//   subsets: ['latin'],
-// })
-
 export const metadata: Metadata = {
-  title: 'blog card link generator',
-  description: 'blog card link generator',
+  title: 'ブログカード風のリンクジェネレーター',
+  description:
+    'ブログやウェブサイトのリンクをカード形式で生成するツールです。簡単に使えて、見栄えの良いリンクを作成できます。',
 }
 
 export default function RootLayout({
