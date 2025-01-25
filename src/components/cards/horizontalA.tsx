@@ -3,10 +3,14 @@ import Link from 'next/link'
 import type { OgObject } from 'open-graph-scraper/types'
 import { twj } from 'tw-to-css'
 
-export default ({ ogp, color }: { ogp: OgObject | null; color: Color }) => {
+export default ({
+  ogp,
+  color,
+  isBorder,
+}: { ogp: OgObject | null; color: Color; isBorder: boolean }) => {
   // console.log('CARD_A')
 
-  const { bg, title, text, border, isBorder } = color
+  const { bg, title, text, border } = color
 
   return (
     <>

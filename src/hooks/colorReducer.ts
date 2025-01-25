@@ -4,7 +4,6 @@ export type Color = {
   title: string
   text: string
   border: string
-  isBorder: boolean
 }
 
 export const colorPalette = {
@@ -14,15 +13,13 @@ export const colorPalette = {
     title: '#374151',
     text: '#6b7280',
     border: '#6b7280',
-    isBorder: false,
   },
   dark: {
     name: 'dark',
     bg: '#272727',
     title: '#eeeeee',
     text: '#ababab',
-    border: '#ababab',
-    isBorder: false,
+    border: '#eeeeee',
   },
 }
 
@@ -32,10 +29,6 @@ export const reducer = (state: Color, action: { type: string }): Color => {
       return colorPalette[action.type]
     case 'dark':
       return colorPalette[action.type]
-    case 'true':
-      return { ...state, isBorder: true }
-    case 'false':
-      return { ...state, isBorder: false }
     default:
       return state
   }

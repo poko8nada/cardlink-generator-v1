@@ -4,7 +4,7 @@ import HorizontalB from '@/components/cards/horizontalB'
 import PhotoMain from '@/components/cards/photoMain'
 import Vertical from '@/components/cards/vertical'
 import LinkData from '@/components/linkData'
-import { useColor } from '@/components/provider/colorProvider'
+import { useBorder, useColor } from '@/components/provider/colorProvider'
 import { useLoading } from '@/components/provider/loadingProvider'
 import { useSetUrl } from '@/components/provider/urlValueProvider'
 import TabMenu from '@/components/tabMenu'
@@ -17,6 +17,7 @@ export default () => {
   const { loading, setLoading } = useLoading()
   const setUrl = useSetUrl()
   const { color } = useColor()
+  const { isBorder } = useBorder()
 
   const [ogp, setOgp] = useState<OgObject | null>(null)
 
@@ -73,16 +74,16 @@ export default () => {
           >
             <div className='mx-auto w-full max-w-3xl'>
               <TabMenu>
-                <HorizontalA ogp={ogp} color={color} />
+                <HorizontalA ogp={ogp} color={color} isBorder={isBorder} />
               </TabMenu>
               <TabMenu>
-                <HorizontalB ogp={ogp} color={color} />
+                <HorizontalB ogp={ogp} color={color} isBorder={isBorder} />
               </TabMenu>
               <TabMenu>
-                <Vertical ogp={ogp} color={color} />
+                <Vertical ogp={ogp} color={color} isBorder={isBorder} />
               </TabMenu>
               <TabMenu>
-                <PhotoMain ogp={ogp} color={color} />
+                <PhotoMain ogp={ogp} color={color} isBorder={isBorder} />
               </TabMenu>
             </div>
           </section>
