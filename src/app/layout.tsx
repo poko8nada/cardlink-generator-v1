@@ -12,6 +12,25 @@ export const metadata: Metadata = {
   title: 'ブログカード風のリンクジェネレーター',
   description:
     'ブログやウェブサイトのリンクをカード形式で生成するツールです。簡単に使えて、見栄えの良いリンクを作成できます。',
+  alternates: {
+    canonical: 'https://cardlink-generator-v1.vercel.app/',
+  },
+  openGraph: {
+    title: 'ブログカード風のリンクジェネレーター',
+    description:
+      'ブログやウェブサイトのリンクをカード形式で生成するツールです。簡単に使えて、見栄えの良いリンクを作成できます。',
+    images: [
+      {
+        url: '/cardlinkIcon.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    siteName: 'ブログカード風のリンクジェネレーター',
+    type: 'website',
+    locale: 'ja_JP',
+    url: 'https://cardlink-generator-v1.vercel.app/',
+  },
 }
 
 export default function RootLayout({
