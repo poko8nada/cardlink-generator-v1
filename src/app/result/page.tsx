@@ -11,7 +11,7 @@ import TabMenu from '@/components/tabMenu'
 import { Spinner } from '@heroui/react'
 import { useSearchParams } from 'next/navigation'
 import type { OgObject } from 'open-graph-scraper/types'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
 export default () => {
   const { loading, setLoading } = useLoading()
@@ -53,7 +53,7 @@ export default () => {
   }, [url, setUrl, setLoading])
 
   return (
-    <>
+    <Suspense>
       {loading && (
         <Spinner
           color='default'
@@ -96,6 +96,6 @@ export default () => {
           </section>
         </>
       )}
-    </>
+    </Suspense>
   )
 }

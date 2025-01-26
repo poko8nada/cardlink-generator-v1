@@ -1,5 +1,5 @@
 import { Tooltip } from '@heroui/react'
-const customTooltip = ({ children }: { children: React.ReactNode }) => {
+const CustomTooltip = ({ children }: { children: React.ReactNode }) => {
   return (
     <Tooltip
       content='クリック後、数秒かかります'
@@ -14,4 +14,4 @@ const customTooltip = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default customTooltip
+export default CustomTooltip

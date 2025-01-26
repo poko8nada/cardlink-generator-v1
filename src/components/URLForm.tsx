@@ -2,6 +2,7 @@
 import { useLoading } from '@/components/provider/loadingProvider'
 import { Button, Form, Input } from '@heroui/react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 import { useSetUrl, useUrlValue } from './provider/urlValueProvider'
 
 export default () => {
@@ -56,27 +57,29 @@ export default () => {
   }
 
   return (
-    <Form
-      className='w-full flex flex-row justify-center items-s gap-3 mx-2'
-      onSubmit={onSubmit}
-      action='/api/ogp'
-      validationErrors={urlObj.error}
-    >
-      <Input
-        placeholder='https://hogehogefugafuga.com'
-        type='url'
-        className='w-full'
-        name='url'
-        defaultValue={searchParams.get('url')?.toString()}
-      />
-      <Button
-        type='submit'
-        variant='flat'
-        name='submitButton'
-        isLoading={loading}
+    <Suspense>
+      <Form
+        className='w-full flex flex-row justify-center items-s gap-3 mx-2'
+        onSubmit={onSubmit}
+        action='/api/ogp'
+        validationErrors={urlObj.error}
       >
-        作成
-      </Button>
-    </Form>
+        <Input
+          placeholder='https://hogehogefugafuga.com'
+          type='url'
+          className='w-full'
+          name='url'
+          defaultValue={searchParams.get('url')?.toString()}
+        />
+        <Button
+          type='submit'
+          variant='flat'
+          name='submitButton'
+          isLoading={loading}
+        >
+          作成
+        </Button>
+      </Form>
+    </Suspense>
   )
 }

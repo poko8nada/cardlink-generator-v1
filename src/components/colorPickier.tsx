@@ -1,4 +1,4 @@
-import CustomTooltip from '@/components/customTooltip'
+import CustomTooltip from '@/components/CustomTooltip'
 import { colorPalette } from '@/hooks/colorReducer'
 import { Radio, RadioGroup, cn } from '@heroui/react'
 import { Switch } from '@heroui/switch'
