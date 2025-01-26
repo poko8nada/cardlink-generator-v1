@@ -1,5 +1,5 @@
 'use client'
-import UrlForm from '@/components/urlForm'
+import UrlForm from '@/components/URLForm'
 import { Navbar, cn } from '@heroui/react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -25,7 +25,7 @@ export default function App() {
             alt='logo'
             width={46}
             height={46}
-            className='w-10 md:w-14 p-1'
+            className='w-12 md:w-14 p-1'
           />
         </Link>
         <div className='flex flex-col justify-between items-center md:flex-row w-full max-w-2xl'>

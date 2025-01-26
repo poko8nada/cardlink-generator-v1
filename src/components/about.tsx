@@ -38,7 +38,7 @@ export default () => {
             をクリックすると、コードをコピーできます。
           </CheckListItem>
           <CheckListItem>
-            CSSはインラインに展開しています。ホバー等はご自由に設定してご利用ください。
+            CSSはインラインに展開しています。ホバー等はご自身で設定しご利用ください。
           </CheckListItem>
         </CheckList>
       </CardBody>
