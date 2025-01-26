@@ -31,6 +31,19 @@ export const metadata: Metadata = {
     locale: 'ja_JP',
     url: 'https://cardlink-generator-v1.vercel.app/',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ブログカード風のリンクジェネレーター',
+    description:
+      'ブログやウェブサイトのリンクをカード形式で生成するツールです。簡単に使えて、見栄えの良いリンクを作成できます。',
+    images: [
+      {
+        url: '/cardlinkIcon.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
